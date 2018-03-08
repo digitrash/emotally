@@ -2,20 +2,36 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="emotally.css">
     <title>EmoTally :: How do you feel about that?</title>
 </head>
 <body>
     <div id="main">
         <h1>EmoTally :: How do you feel about that?</h1>
-        <div id="topics">
-            <h2>Topics</h2>
-            <ul>
-                <li>Topic One</li>
-                <li>Topic Two</li>
-                <li>Topic Three</li>
-                <li>Topic Four</li>
-            </ul>
+        <hr>
+        <button id="addTopic">Submit Topic</button>
+        <h2>Topics</h2>
+        <div id="topics"></div>
+        <div id="reax">
+            <i id="happy" class="emo em em-grinning"></i>
+            <i id="meh" class="emo em em-neutral_face"></i>
+            <i id="sad" class="emo em em-anguished"></i>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        window.emo = (function(emo) {
+            'use strict';
+            return emo;
+        })(window.emo || {});
+    </script>
+    <script type="text/javascript" src="app.js"></script>
+    <script>
+        (function() {
+            new emo.Tally();
+        }());
+    </script>
 </body>
 </html>

@@ -1,0 +1,46 @@
+body {
+    font-family: 'Cabin', sans-serif;
+    padding: 20px 6%;
+    font-size: 14px;
+    color: rgb(0,0,0);
+}
+
+#topics {
+    .topic {
+        position: relative;
+        font-weight: 600;
+        margin: -1px 0;
+        padding: 10px;
+        border: 1px solid #eee;
+    }
+}
+
+#addTopic {
+    margin-top: 5px;
+    padding: 8px;
+    float: right;
+    font-size: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+        background-image: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.1));
+    }
+    &:active {
+        background-image: linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.2));
+    }
+}
+
+#reax {
+    display: none;
+    position: absolute;
+    right: 8px;
+    top: 25%;
+    bottom: 25%;
+    z-index: 2;
+    .emo {
+        cursor: pointer;
+        margin-left: 4px;
+    }
+}
