@@ -15,10 +15,8 @@ body {
     }
 }
 
-#addTopic {
-    margin-top: 5px;
+button {
     padding: 8px;
-    float: right;
     font-size: 12px;
     border-radius: 6px;
     font-weight: 600;
@@ -32,6 +30,11 @@ body {
     }
 }
 
+#addTopic {
+    margin-top: 5px;
+    float: right;
+}
+
 #reax {
     display: none;
     position: absolute;
@@ -42,5 +45,67 @@ body {
     .emo {
         cursor: pointer;
         margin-left: 4px;
+    }
+}
+
+#modalBg {
+    display: none;
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: rgba(0,0,0,.85);
+    .modal {
+        display: none;
+        position: relative;
+        margin: 40px 10% 50% 10%;
+        background: rgba(255,255,255,.95);
+        padding: 20px 10px;
+        border-radius: 10px;
+        border: 1px solid #222;
+        button {
+            margin-top: 5px;
+        }
+    }
+}
+
+#addModal {
+    .radio-heading {
+        vertical-align: bottom;
+        display: inline-block;
+        height: 32px;
+        margin: 0 6px;
+        font-size: 17px;
+    }
+    label {
+        position: relative;
+        input[type='radio'] {
+            height: 40px;
+            width: 39px;
+            margin: 0;
+            padding: 0;
+            &:checked {
+                border:2px solid #00dd00;
+            }
+        }
+        .em {
+            position: absolute;
+            z-index: 2;
+            top: -15px;
+            left: 9px;
+        }
+    }
+    textarea {
+        border: 1px solid #eee;
+        border-radius: 6px;
+        padding: 10px;
+        height: 90px;
+        width: 80%;
+        font-family: 'Cabin', sans-serif;
+        font-size: 16px;
+        color: #959595;
     }
 }

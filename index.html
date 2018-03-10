@@ -8,6 +8,31 @@
     <title>EmoTally :: How do you feel about that?</title>
 </head>
 <body>
+    <div id="modalBg">
+        <div class="modal" id="addModal">
+            <h1>Add a Topic</h1>
+            <div>
+                <div class="radio-heading">How does this make you feel?</div>
+                <label>
+                    <input type="radio" name="emo" value="happy" />
+                    <i class="emo em em-grinning"></i>
+                </label>
+                <label>
+                    <input type="radio" name="emo" value="meh" />
+                    <i class="em em-neutral_face"></i>
+                </label>
+                <label>
+                    <input type="radio" name="emo" value="sad" />
+                    <i class="em em-anguished"></i>
+                </label>
+            </div>
+            <textarea id="topicInput" placeholder="Enter a new topic..."></textarea>
+            <div>
+                <button id="cancelAddTopic">Cancel</button>
+                <button id="submitAddTopic">Submit</button>
+            </div>
+        </div>
+    </div>
     <div id="main">
         <h1>EmoTally :: How do you feel about that?</h1>
         <hr>
