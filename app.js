@@ -65,8 +65,8 @@ emo.Tally = function() {
 
 emo.Tally.prototype.listeners = function() {
     this.$add.on('click', this.showAddDialog.bind(this));
-    this.$topics.on('mouseenter', '.topic', this.showReax.bind(this));
-    this.$topics.on('mouseleave', '.topic', this.hideReax.bind(this));
+    //this.$topics.on('mouseenter', '.topic', this.showReax.bind(this));
+    //this.$topics.on('mouseleave', '.topic', this.hideReax.bind(this));
     this.$reax.on('onmouseenter mouseleave', function(e){
         e.stopPropagation();
     });
@@ -100,9 +100,19 @@ emo.Tally.prototype.addTopic = function() {
 
 emo.Tally.prototype.updateTopics = function() {
     console.log("topics", this.topics);
-    this.$topics.empty();
+    this.$topics.find('.happy').empty();
+    this.$topics.find('.med').empty();
+    this.$topics.find('.sad').empty();
     this.topics.forEach(function (t) {
-        this.$topics.append('<div class="topic">' + t.text + '</div>');
+        if (t.happy) {
+            this.$topics.find('.happy').append('<div class="topic">' + t.text + '</div>');
+        }
+        if (t.meh) {
+            this.$topics.find('.meh').append('<div class="topic">' + t.text + '</div>');
+        }
+        if (t.sad) {
+            this.$topics.find('.sad').append('<div class="topic">' + t.text + '</div>');
+        }
     }.bind(this));
 };
 

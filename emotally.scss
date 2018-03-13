@@ -6,6 +6,29 @@ body {
 }
 
 #topics {
+    .bin {
+        width: 33%;
+        display: inline-block;
+        vertical-align: top;
+        &.happy {
+            &:before {
+                content: 'happy';
+                margin: 5px;
+            }
+        }
+        &.meh {
+            &:before {
+                content: 'meh';
+                margin: 5px;
+            }
+        }
+        &.sad {
+            &:before {
+                content: 'sad';
+                margin: 5px;
+            }
+        }
+    }
     .topic {
         position: relative;
         font-weight: 600;

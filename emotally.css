@@ -4,6 +4,18 @@ body {
   font-size: 14px;
   color: black; }
 
+#topics .bin {
+  width: 33%;
+  display: inline-block;
+  vertical-align: top; }
+  #topics .bin.happy:before {
+    content: 'happy';
+    margin: 5px; }
+  #topics .bin.meh:before {
+    content: 'meh';
+    margin: 5px; }
+  #topics .bin.sad:before {
+    content: 'sad'; }
 #topics .topic {
   position: relative;
   font-weight: 600;
