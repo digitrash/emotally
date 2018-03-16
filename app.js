@@ -48,6 +48,10 @@ emo.Tally = function() {
     this.$submitAddTopic = $('#submitAddTopic');
     this.$topicInput = $('#topicInput');
 
+    this.$happyList = this.$topics.find('.happy .bin-items');
+    this.$mehList = this.$topics.find('.meh .bin-items');
+    this.$sadList = this.$topics.find('.sad .bin-items');
+
     // data storage
     this.topics = [];
     this.topics.push(new emo.Topic('The rain in Spain', 'happy'));
@@ -100,18 +104,18 @@ emo.Tally.prototype.addTopic = function() {
 
 emo.Tally.prototype.updateTopics = function() {
     console.log("topics", this.topics);
-    this.$topics.find('.happy').empty();
-    this.$topics.find('.med').empty();
-    this.$topics.find('.sad').empty();
+    this.$happyList.empty();
+    this.$mehList.empty();
+    this.$sadList.empty();
     this.topics.forEach(function (t) {
         if (t.happy) {
-            this.$topics.find('.happy').append('<div class="topic">' + t.text + '</div>');
+            this.$happyList.append('<div class="topic">' + t.text + '</div>');
         }
         if (t.meh) {
-            this.$topics.find('.meh').append('<div class="topic">' + t.text + '</div>');
+            this.$mehList.append('<div class="topic">' + t.text + '</div>');
         }
         if (t.sad) {
-            this.$topics.find('.sad').append('<div class="topic">' + t.text + '</div>');
+            this.$sadList.append('<div class="topic">' + t.text + '</div>');
         }
     }.bind(this));
 };
