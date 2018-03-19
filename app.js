@@ -3,33 +3,26 @@
 /**
  *
  * The Topic model
+ * @typedef Topic
  * @param {string} text
  * @param {string} emotion
+ * @param {?number} created
  * @constructor
  */
-emo.Topic = function(text, emotion) {
+emo.Topic = function(text, emotion, created) {
+    this.created = created || Date.now();
     this.text = text || '';
     this.happy = emotion === 'happy';
     this.meh = emotion === 'meh';
     this.sad = emotion === 'sad';
+    this.votes = 0;
 };
 
 /**
  *
- * @param {string} type
  */
-emo.Topic.prototype.vote = function(type) {
-    switch (type) {
-        case 'happy':
-            this.happy++;
-            break;
-        case 'meh':
-            this.meh++;
-            break;
-        case 'sad':
-            this.sad++;
-            break;
-    }
+emo.Topic.prototype.vote = function() {
+    this.votes++;
 };
 
 /**
@@ -40,40 +33,32 @@ emo.Topic.prototype.vote = function(type) {
 emo.Tally = function() {
     // DOM elements
     this.$add = $('#addTopic');
-    this.$reax = $('#reax');
     this.$topics = $('#topics');
     this.$modalBg = $('#modalBg');
     this.$addModal = $('#addModal');
     this.$cancelAddTopic = $('#cancelAddTopic');
     this.$submitAddTopic = $('#submitAddTopic');
     this.$topicInput = $('#topicInput');
-
     this.$happyList = this.$topics.find('.happy .bin-items');
     this.$mehList = this.$topics.find('.meh .bin-items');
     this.$sadList = this.$topics.find('.sad .bin-items');
 
     // data storage
     this.topics = [];
-    this.topics.push(new emo.Topic('The rain in Spain', 'happy'));
-    this.topics.push(new emo.Topic('Falls mainly on the plain', 'meh'));
-    this.topics.push(new emo.Topic('I will not eat them on a train', 'sad'));
-    this.topics.push(new emo.Topic('I will not eat them on a plane', 'sad'));
 
-    // state
-    this.sortedBy = null;
+    // temp data for testing
+    this.topics.push(new emo.Topic('The rain in Spain', 'happy', 1));
+    this.topics.push(new emo.Topic('Falls mainly on the plain', 'meh', 2));
+    this.topics.push(new emo.Topic('I will not eat them on a train', 'sad', 3));
+    this.topics.push(new emo.Topic('I will not eat them on a plane', 'sad', 4));
 
     this.updateTopics();
-
-    this.listeners();
+    this.bindEvents();
 };
 
-emo.Tally.prototype.listeners = function() {
+emo.Tally.prototype.bindEvents = function() {
     this.$add.on('click', this.showAddDialog.bind(this));
-    //this.$topics.on('mouseenter', '.topic', this.showReax.bind(this));
-    //this.$topics.on('mouseleave', '.topic', this.hideReax.bind(this));
-    this.$reax.on('onmouseenter mouseleave', function(e){
-        e.stopPropagation();
-    });
+    this.$topics.on('click', '.vote', this.vote.bind(this));
     this.$cancelAddTopic.on('click', this.hideAddDialog.bind(this));
     this.$submitAddTopic.on('click', this.addTopic.bind(this));
 };
@@ -96,7 +81,7 @@ emo.Tally.prototype.addTopic = function() {
     }
     var emotion = $('input[name=emo]:checked').val();
     console.log("new topic/emotion", topic, emotion);
-    this.topics.push(new emo.Topic(topic, emotion));
+    this.topics.push(new emo.Topic(topic, emotion, null));
     this.$topicInput.val('');
     this.updateTopics();
     this.hideAddDialog();
@@ -107,30 +92,54 @@ emo.Tally.prototype.updateTopics = function() {
     this.$happyList.empty();
     this.$mehList.empty();
     this.$sadList.empty();
+
+    // sort by value
+    this.topics.sort(function (a, b) {
+      return b.votes - a.votes;
+    });
+
     this.topics.forEach(function (t) {
         if (t.happy) {
-            this.$happyList.append('<div class="topic">' + t.text + '</div>');
+            this.$happyList.append(this.buildRow(t));
         }
         if (t.meh) {
-            this.$mehList.append('<div class="topic">' + t.text + '</div>');
+            this.$mehList.append(this.buildRow(t));
         }
         if (t.sad) {
-            this.$sadList.append('<div class="topic">' + t.text + '</div>');
+            this.$sadList.append(this.buildRow(t));
         }
     }.bind(this));
 };
 
-emo.Tally.prototype.showReax = function(el) {
-    var $e = $(el.currentTarget);
-    var pos = $e.position();
-    this.$reax.css({'top': pos.top+"px", 'left': pos.left + $e.width() - 100+'px'});
-    this.$reax.show();
+/**
+ * Build HTML for a topic row
+ * @param {Topic} t
+ */
+emo.Tally.prototype.buildRow = function(t) {
+    return '<div class="topic" data-created="'+ t.created+'">' + t.text +
+        ' <span class="votes">'+ t.votes +'</span><i class="vote icon-plus"></i></div>';
 };
 
-emo.Tally.prototype.hideReax = function(el) {
-    this.$reax.hide();
+/**
+ * Increment vote count for a selected Topic
+ * @param {Object} e
+ */
+emo.Tally.prototype.vote = function(e) {
+    e.stopPropagation();
+    var $e = $(e.currentTarget).parent('.topic');
+    this.getTopic($e.data('created')).vote();
+    this.updateTopics();
 };
 
+/**
+ * Get Topic for given creation Id
+ * @param {number} createdAt
+ */
+emo.Tally.prototype.getTopic = function(createdAt) {
+    return this.topics.find(function (topic) {
+        return topic.created === createdAt;
+    });
+};
 
 emo.Tally.prototype.reset = function() {
 

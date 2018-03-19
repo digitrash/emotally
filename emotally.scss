@@ -99,6 +99,14 @@ body {
         i {
             font-size: 34px;
         }
+        i.vote {
+            font-size: 17px;
+            color: rgba(0,0,0,.2);
+            cursor: pointer;
+            &:hover {
+                color: rgba(0,0,0,.4);
+            }
+        }
         .bin-items {
             margin-top: 5px;
             text-align: left;
@@ -110,6 +118,20 @@ body {
         margin: -1px 0;
         padding: 10px;
         border: 1px solid #eee;
+        .vote {
+            position: absolute;
+            right: 8px;
+            top: 25%;
+            bottom: 25%;
+            z-index: 2;
+        }
+        .votes {
+            position: absolute;
+            z-index: 3;
+            right: 1px;
+            top: 0;
+            color: rgba(0,0,0,.3);
+        }
     }
 }
 
@@ -131,19 +153,6 @@ button {
 #addTopic {
     margin-top: 5px;
     float: right;
-}
-
-#reax {
-    display: none;
-    position: absolute;
-    right: 8px;
-    top: 25%;
-    bottom: 25%;
-    z-index: 2;
-    .emo {
-        cursor: pointer;
-        margin-left: 4px;
-    }
 }
 
 #modalBg {
