@@ -96,6 +96,11 @@ body {
         width: 33%;
         vertical-align: top;
         text-align: center;
+        padding-top: 12px;
+        margin-top: 15px;
+        margin-right: 3px;
+        background-color: rgba(0,0,0,.1);
+        border-radius: 8px;
         i {
             font-size: 34px;
         }
@@ -108,7 +113,8 @@ body {
             }
         }
         .bin-items {
-            margin-top: 5px;
+            background-color:rgba(255,255,255,.9);
+            margin-top: 12px;
             text-align: left;
         }
     }
@@ -128,9 +134,13 @@ body {
         .votes {
             position: absolute;
             z-index: 3;
-            right: 1px;
-            top: 0;
-            color: rgba(0,0,0,.3);
+            right: 3px;
+            top: 2px;
+            font-size: 10px;
+            color: rgba(0, 0, 0, 0.25);
+        }
+        &:last-child {
+            border-radius: 0 0 8px 8px;
         }
     }
 }
@@ -214,5 +224,14 @@ button {
         font-family: 'Cabin', sans-serif;
         font-size: 16px;
         color: #959595;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+    #topics {
+        .bin {
+            margin-right: 0;
+            width: 100%;
+        }
     }
 }
